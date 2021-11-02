@@ -57,7 +57,8 @@ const config = {
   partnerKey: '微信支付安全密钥',
   pfx: require('fs').readFileSync('证书文件路径'),
   notify_url: '支付回调网址',
-  spbill_create_ip: 'IP地址'
+  spbill_create_ip: 'IP地址',
+  certificate: {key: 'string', cert: 'string'} //选填，certificate比pfx优先
 };
 // 方式一
 const api = new tenpay(config);
@@ -75,6 +76,9 @@ const sandboxAPI = await tenpay.sandbox(config);
 - `appid` - 公众号ID(必填)
 - `mchid` - 微信商户号(必填)
 - `partnerKey` - 微信支付安全密钥(必填, 在微信商户管理界面获取)
+- `certificate` - 证书文件(选填, 在微信商户管理界面获取, 优先级比pfx高)
+  - 当不需要调用依赖证书的API时可不填此参数
+  - 若业务流程中使用了依赖证书的API则需要在初始化时传入此参数
 - `pfx` - 证书文件(选填, 在微信商户管理界面获取)
   - 当不需要调用依赖证书的API时可不填此参数
   - 若业务流程中使用了依赖证书的API则需要在初始化时传入此参数
